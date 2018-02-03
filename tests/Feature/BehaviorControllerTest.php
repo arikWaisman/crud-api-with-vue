@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Artisan;
 
 class BehaviorControllerTest extends TestCase
 {
@@ -54,7 +55,7 @@ class BehaviorControllerTest extends TestCase
       
         $behavior = ['breakfast' => 'eggs', 'daily_routine' => 'work', 'feeling' => 'good'];
 
-        $this->post('/api/behavior?token=' . $this->token, $behavior )
+        $this->json( 'POST', '/api/behavior?token=' . $this->token, $behavior )
             ->assertStatus(201)
             ->assertJsonFragment([
                 'breakfast' => 'eggs',
